@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poppins:wght@300;400;700&family=Rubik+Vinyl&display=swap"
+        rel="stylesheet">
+    <style>
+        html {
+            height: 100%;
+            font-size: 16px
+        }
+
+        body {
+            background-image: url(./images/banner_background.png);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            background-color: rgba(37, 37, 37, 0.041);
+        }
+
+        .heading {
+            margin-top: 20px;
+            font-size: 4rem;
+            font-family: 'Luckiest Guy', cursive;
+            color: yellow;
+            -webkit-text-stroke: 1px rgb(3, 58, 21);
+            text-shadow: 1px 2px rgb(0, 255, 85), 3px 4px rgb(0, 0, 0);
+        }
+
+        #vtContent {
+            display: none;
+            position: relative;
+            width: 30%;
+            border: 4px solid white;
+            justify-content: center;
+            font-size: 3rem;
+            padding: 20px 20px;
+            box-shadow: 0 1px 20px 2px rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+            background-color: white;
+            border-radius: 10px;
+            color: yellow;
+            -webkit-text-stroke: 2px rgb(3, 58, 21);
+            margin-top: 10px;
+        }
+
+        .container-Score {
+
+            display: flex;
+            position: relative;
+            align-items: center;
+            justify-content: space-evenly;
+            width: 30%;
+            background-color: white;
+            border: 2px solid green;
+            padding: 0px 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .container-Square {
+            display: flex;
+            position: relative;
+            width: 40%;
+        }
+
+        .makeSquare {
+            padding-top: 100%;
+        }
+
+        .square {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border: 1px solid green;
+            font-size: 8vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow:
+                -2px 0px 0px green,
+                2px 0px 0px green,
+                0px -2px 0px green,
+                0px 2px 0px green;
+
+        }
+
+        .squareAnimation {
+            animation: test 0.1s linear;
+        }
+
+        @keyframes test {
+
+            0% {
+                text-shadow:
+                    -1px 0px 0px white,
+                    1px 0px 0px white,
+                    0px -1px 0px white,
+                    0px 1px 0px white;
+                font-size: 12vw;
+            }
+        }
+
+        .btn-decor {
+            width: 150px;
+            height: 100%;
+            margin: 0 20px;
+            border: 1px solid green;
+            font-size: 1rem;
+            font-weight: bold;
+            background-color: green;
+            cursor: pointer;
+            transition: 0.1s;
+            color: yellow;
+        }
+
+        .btn-decor:hover {
+            border-radius: 10px;
+            background-color: green;
+            color: white;
+            height: 180%;
+            width: 150px;
+            font-size: 1.5rem;
+
+        }
+
+
+        .winGame {
+            background-color: rgba(0, 128, 0, 0.144);
+            color: green;
+            border: 2px solid green;
+            text-shadow:
+                -2px 0px 0px yellow,
+                2px 0px 0px yellow,
+                0px -2px 0px yellow,
+                0px 2px 0px yellow;
+            animation: winGame 1s;
+        }
+
+        @keyframes winGame {
+            25% {
+                text-shadow:
+                    -2px 0px 0px green,
+                    2px 0px 0px green,
+                    0px -2px 0px green,
+                    0px 2px 0px green;
+                color: white;
+                border: 1px solid green;
+            }
+        }
+
+        .colorBackground {
+            position: absolute;
+            z-index: -2;
+            width: 60%;
+            height: 100%;
+            background-color: white;
+            box-shadow: 0 1px 20px 2px rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+        }
+
+        .sizeBox {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #scoreValueX,
+        #scoreValueO {
+            display: flex;
+            position: relative;
+            right: 0px;
+            color: rgb(3, 58, 21);
+            padding-right: 0px;
+        }
+
+        @media only screen and (min-width: 350px) {
+            .heading {
+                font-size: 1.5rem;
+            }
+
+            .container-Score {
+                flex-direction: column;
+                width: 30%;
+            }
+
+            #clickStart {
+                order: -1;
+            }
+
+            .colorBackground {
+                width: 70%;
+            }
+        }
+
+
+        @media only screen and (min-width: 600px) {
+            .heading {
+                font-size: 2rem;
+            }
+
+            .container-Score {
+                width: 60%;
+                flex-direction: row;
+            }
+
+            #clickStart {
+                order: 0;
+            }
+
+            .colorBackground {
+                width: 70%;
+            }
+        }
+
+        @media only screen and (min-width: 768px) {
+            .heading {
+                font-size: 3rem;
+            }
+
+            .container-Score {
+                width: 40%;
+                flex-direction: row;
+            }
+
+            #clickStart {
+                order: 0;
+            }
+        }
+
+
+        @media only screen and (min-width: 992px) {
+            .container-Score {
+                width: 30%;
+                flex-direction: row;
+            }
+
+            #clickStart {
+                order: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="colorBackground"></div>
+    <div class="heading">GAME TIC TAC TOE</div>
+    <div id="vtContent"></div>
+    <div class="container-Score">
+        <div class="sizeBox scoreX">
+            <label style="color: green" for="">X win:</label>
+            <label id="scoreValueX" for="">0</label>
+        </div>
+        <button id="clickStart" onclick="DrawTable(`clickStart`,vtContent)" class="btn btn-decor">START</button>
+        <div class="sizeBox">
+            <label style="color: green" for="">O win:</label>
+            <label id="scoreValueO" for="">0</label>
+        </div>
+    </div>
+
+    <script>
+        let checkKey
+        let totalXwin = 0
+        let totalOwin = 0
+        let arrayX = []
+        let arrayO = []
+        let arrayWin = []
+        function decorWiner(array) {
+            array.forEach(element => {
+                document.getElementById(element).setAttribute("class", "square winGame")
+            });
+        }
+
+
+        function checkWin(array) {
+
+            let arrayAllWin =
+                [
+                    ['00', '01', '02'],
+                    ['10', '11', '12'],
+                    ['20', '21', '22'],
+
+                    ['00', '10', '20'],
+                    ['01', '11', '21'],
+                    ['02', '12', '22'],
+
+                    ['00', '11', '22'],
+                    ['02', '11', '20']
+                ]
+
+            arrayAllWin.forEach(winWay => {
+                let count = 0
+
+                winWay.forEach(winWayIndex => {
+                    if (array.includes(winWayIndex)) { count++ }
+                })
+
+                if (count == 3) {
+                    arrayWin=winWay
+                    return arrayWin
+                }
+            })
+
+
+            // winR0 = array.includes("00") && array.includes("01") && array.includes("02")
+            // winR1 = array.includes("10") && array.includes("11") && array.includes("12")
+            // winR2 = array.includes("20") && array.includes("21") && array.includes("22")
+
+            // winC0 = array.includes("00") && array.includes("10") && array.includes("20")
+            // winC1 = array.includes("01") && array.includes("11") && array.includes("21")
+            // winC2 = array.includes("02") && array.includes("12") && array.includes("22")
+
+            // winX1 = array.includes("00") && array.includes("11") && array.includes("22")
+            // winX2 = array.includes("02") && array.includes("11") && array.includes("20")
+
+            // if (winR0) { arrayWin = ['00', '01', '02'] }
+            // if (winR1) { arrayWin = ['10', '11', '12'] }
+            // if (winR2) { arrayWin = ['20', '21', '22'] }
+
+            // if (winC0) { arrayWin = ['00', '10', '20'] }
+            // if (winC1) { arrayWin = ['01', '11', '21'] }
+            // if (winC2) { arrayWin = ['02', '12', '22'] }
+
+            // if (winX1) { arrayWin = ['00', '11', '22'] }
+            // if (winX2) { arrayWin = ['02', '11', '20'] }
+        }
+
+        function scountScore() {
+
+            if (arrayX.length + arrayO.length == 9) {
+                document.getElementById("vtContent").style.display = 'flex'
+                document.getElementById("vtContent").innerHTML = "DRAW"
+            }
+            else if ((arrayWin.length == 3)) {
+
+                if (arrayX.length > arrayO.length) {
+                    totalXwin++
+                    document.getElementById("scoreValueX").innerHTML = totalXwin
+                } else {
+                    totalOwin++
+                    document.getElementById("scoreValueO").innerHTML = totalOwin
+                }
+            }
+
+        }
+        function clickMe(id) {
+            let checkContent = document.getElementById(id).innerHTML
+            if ((checkContent == '') && (arrayWin.length < 3)) {
+                if (checkKey) {
+                    document.getElementById(id).innerHTML = 'X'
+                    document.getElementById(id).setAttribute("class", "square squareAnimation")
+                    checkKey = false
+                    arrayX.push(id)
+                    checkWin(arrayX)
+                    decorWiner(arrayWin)
+                    scountScore()
+                }
+                else {
+                    document.getElementById(id).innerHTML = 'O'
+                    checkKey = true
+                    arrayO.push(id)
+                    checkWin(arrayO)
+                    decorWiner(arrayWin)
+                    scountScore()
+                }
+            }
+        }
+
+        function DrawTable(id, contentPosition) {
+            document.getElementById("vtContent").style.display = 'block'
+            document.getElementById(id).innerHTML = 'Restart'
+            let stringDrawTable = ``
+            for (i = 0; i < 3; i++) {
+                let stringDrawRow = ``
+                {
+                    for (j = 0; j < 3; j++) {
+                        stringDrawRow += `<div class="container-Square" ><div class="makeSquare"></div> <div id="${i}${j}" class="square" onclick="clickMe('${i}${j}')")"></div></div>`
+                    }
+                    stringDrawTable += `<div class="containerBig" style="display:flex">${stringDrawRow}</div>`
+                }
+            }
+            contentPosition.innerHTML = stringDrawTable
+            checkKey = true
+            arrayX = []
+            arrayO = []
+            arrayWin = []
+        }
+
+    </script>
+
+</body>
+
+</html>

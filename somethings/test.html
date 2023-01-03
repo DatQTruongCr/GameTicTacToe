@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+button {
+  background-color: #333;
+  color: #fff;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+}
+
+#dropdown-menu {
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+#dropdown-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#dropdown-menu li {
+  display: block;
+  padding: 12px 16px;
+}
+
+#dropdown-menu a {
+  color: #333;
+  text-decoration: none;
+}
+
+#dropdown-menu a:hover {
+  background-color: #ddd;
+}
+  </style>
+</head>
+<body>
+  
+  <button id="dropdown-button">Menu</button>
+<div id="dropdown-menu">
+  <ul>
+    <li><a href="#">Item 1</a></li>
+    <li><a href="#">Item 2</a></li>
+    <li><a href="#">Item 3</a></li>
+  </ul>
+</div>
+
+  <script>
+function quickSort(arr) {
+  if (arr.length <= 1) {
+    return arr;
+  }
+
+  const pivot = arr[arr.length - 1];
+  const left = [];
+  const right = [];
+
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i] < pivot) {
+      left.push(arr[i]);
+    } else {
+      right.push(arr[i]);
+    }
+  }
+
+  return [...quickSort(left), pivot, ...quickSort(right)];
+}
+
+const sortedArray = quickSort([5, 2, 9, 1, 4, 7, 6, 3, 8]);
+console.log(sortedArray); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  </script>
+</body>
+</html>
